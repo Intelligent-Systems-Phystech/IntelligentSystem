@@ -1,36 +1,75 @@
-\documentclass[a4paper,14pt]{article}
-
+\documentclass{mybook}
+\usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
-\usepackage[toc,page]{appendix}
 
+\usepackage{amsthm}
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsmath}
-\numberwithin{equation}{section}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{tabularx}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{lastpage}
+
+\usepackage[toc,page]{appendix}
+\usepackage{hyperref}
+
+\usepackage{geometry}
+\geometry{left=1.5cm}
+\geometry{right=1.5cm}
+\geometry{top=2.0cm}
+\geometry{bottom=3.0cm}
+\renewcommand{\baselinestretch}{1.0}
+
+%https://tex.stackexchange.com/questions/163451/total-number-of-citations
+\usepackage{totcount}
+\newtotcounter{citnum} %From the package documentation
+\def\oldbibitem{} \let\oldbibitem=\bibitem
+\def\bibitem{\stepcounter{citnum}\oldbibitem}
+
+\makeatletter
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{#1.~#2}%
+  \ifdim \wd\@tempboxa >\hsize
+    #1.~#2\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+\makeatother
+
+\reversemarginpar
 
 \usepackage[
 backend=biber,
 style=numeric,
 sorting=ynt
 ]{biblatex}
-\addbibresource{sections/*/main.bib}
-
-\usepackage{subfiles} % Best loaded last in the preamble
-
-\title{Intelligent Systems}
-\date{}
+\addbibresource{chapters/*/main.bib}
 
 \begin{document}
+% Титульный лист
+\input{title}
 
-    \maketitle
-    \tableofcontents
+\setcounter{page}{2}
+
+% Оглавление
+\newpage
+\tableofcontents
     
     % Example chapter
     \clearpage
-    \section{Example of Report} % Report title
-    \subfile{sections/example/main}{} % Path to created report 
-    
+    \chapter{Пример Отчета}
+    \input{chapters/example/main.tex}
+    ы
     % Other chapters
 
     % Bibliography

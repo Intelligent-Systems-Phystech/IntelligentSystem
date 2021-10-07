@@ -547,4 +547,4 @@
 \renewcommand{\@biblabel}[1]{#1.}
 \endinput
 %%
-%% End of file `dissert.cls'.
+%% End of file `mybook.cls'.
